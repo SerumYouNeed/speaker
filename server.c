@@ -1,4 +1,5 @@
 #define _POSIX_C_SOURCE 200112L // for POSIX functions, eg. getaddrinfo
+
 #include <sys/socket.h>
 #include <sys/types.h>
 #include <stdio.h>
@@ -22,15 +23,6 @@ void *get_in_addr(struct sockaddr *sa)
     }
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
-
-// void sig_chldhandler(int s)
-// {
-//     (void)s;
-//     int save_errno = errno;
-    
-//     while(waitpid(-1, NULL, WNOHANG) > 0);
-//     errno = save_errno;
-// }
 
 int main(void)
 {
@@ -92,6 +84,8 @@ int main(void)
 	    exit(1);
     }
 
+    printf("waiting for connection...\n");
+
     while(1)
     {
 	    sin_size = sizeof their_addr;
@@ -102,9 +96,11 @@ int main(void)
             perror("accept");
             continue;
         }
+
         inet_ntop(their_addr.ss_family, get_in_addr((struct sockaddr *)&their_addr), s, sizeof s);
         printf("server: connection from %s\n", s);
 
+        send(newfd, "Hello from my first server in C!\n", 34, 0);
     	close(newfd);
     } 
 
