@@ -19,7 +19,7 @@ void *get_in_addr(struct sockaddr *sa)
 {
     if(sa->sa_family == AF_INET)
     {
-	return &(((struct sockaddr_in*)sa)->sin_addr);
+	    return &(((struct sockaddr_in*)sa)->sin_addr);
     }
     return &(((struct sockaddr_in6*)sa)->sin6_addr);
 }
@@ -97,6 +97,7 @@ int main(void)
             continue;
         }
 
+        // converts an IPv4 or IPv6 Internet network address into a string in the standard text format
         inet_ntop(their_addr.ss_family, get_in_addr((struct sockaddr *)&their_addr), s, sizeof s);
         printf("server: connection from %s\n", s);
 
