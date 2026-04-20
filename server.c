@@ -102,7 +102,12 @@ int main(void)
         printf("server: connection from %s\n", s);
 
         send(newfd, "Hello from my first server in C!\n", 34, 0);
-    	close(newfd);
+    	
+        char buf[100];
+        recv(newfd, buf, sizeof buf, 0);
+        printf("client says: %s\n", buf);
+        
+        close(newfd);
     } 
 
     return (0);

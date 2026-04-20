@@ -87,6 +87,7 @@ int main(void)
 
     printf("client: received '%s'\n", buf);
 
+    
     close(sockfd);
 
     return (0);
