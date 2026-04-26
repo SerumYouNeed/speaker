@@ -1,5 +1,6 @@
 #include <stdio.h>
 
+// zachowaj
 int myStrLen(char *s)
 {
     char *p=s;
