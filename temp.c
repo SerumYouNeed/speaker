@@ -1,23 +1,17 @@
 #include <stdio.h>
 
-// zachowaj
-int myStrLen(char *s)
-{
-    char *p=s;
 
-    while (*p != '\0')
-    {
-        printf("*p: %c\n", *p);
-        printf("p: %p\n", p);
-        p++;
-    }
-    return (p-s);
-}
 
 int main(void)
 {
-    char *myStr = "hello!";
-    printf("The length of the string is: %d\n", myStrLen(myStr));
+    FILE *fp;
 
-    return (0);
+    fp = fopen("list.txt", "w");
+    char task[1024];
+    int taskNumber = 1;
+
+    printf("Enter new task: \n");
+    scanf(" %s", task);
+    fprintf(fp, "%d. %s", taskNumber, task);
+
 }
